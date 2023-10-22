@@ -1,6 +1,8 @@
-import {JoinTable, Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToMany, OneToOne, JoinColumn } from 'typeorm'
+import {JoinTable, Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToMany, OneToOne, JoinColumn, OneToMany } from 'typeorm'
 import Turma from './Turma'
 import Conta from './Conta'
+import User from './User'
+import Token from './Tokens'
 
 @Entity()
 export default class Aluno extends BaseEntity {
@@ -22,9 +24,13 @@ export default class Aluno extends BaseEntity {
   @Column({ type: 'date' })
   dataNascimento!: Date;
 
-
-
   @ManyToMany(() => Turma)
   @JoinTable() 
   turmas!: Turma[];
+
+  @OneToOne(() => User, user => user.tipoUsuario)
+  tipoUsuario!: User[]
+
+  @OneToOne(() => Conta, conta => conta.idConta)
+  numeroConta!: Conta[]
 }

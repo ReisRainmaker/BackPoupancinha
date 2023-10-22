@@ -3,10 +3,10 @@ import ProfessorController from '../../controllers/professor/professor.controlle
 
 const professorRoutes = Router();
 
-professorRoutes.post('/professor', ProfessorController.store);
-professorRoutes.get('/professor', ProfessorController.index);
-professorRoutes.get('/professor/:idProfessor', ProfessorController.show);
-professorRoutes.delete('/professor/:idProfessor', ProfessorController.delete);
-professorRoutes.put('/professor/:idProfessor', ProfessorController.update);
+professorRoutes.post('/', ProfessorController.store);
+professorRoutes.get('/', ProfessorController.index);
+professorRoutes.get('/:idProfessor', ProfessorController.show);
+professorRoutes.delete('/:idProfessor', ProfessorController.delete);
+professorRoutes.put('/:idProfessor', ProfessorController.update);
 
 export default professorRoutes;

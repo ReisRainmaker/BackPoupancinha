@@ -6,9 +6,11 @@ import pontuacaoRoutes from './pontuacao/pontuacao.routes';
 import produtoRoutes from './produtos/produtos.routes';
 import professorRoutes from './professor/professor.routes';
 import turmaRoutes from './turma/turma.routes';
+import authRoutes from './auth/auth.routes';
 
 const routes = Router();
 
+routes.use('/auth', authRoutes)
 routes.use('/aluno', alunoRoutes);
 routes.use('/conta', contaRoutes);
 routes.use('/movimentacao', movimentacaoRoutes);

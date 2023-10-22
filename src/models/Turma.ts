@@ -13,9 +13,12 @@ export default class Turma extends BaseEntity {
   @Column()
   serie!: number
 
+  @Column()
+  idProfessor!: number
+
   @ManyToOne(() => Professor)
   @JoinColumn({name: 'idProfessor'})
-  idProfessor!: Professor;
+  professor!: Professor;
 
   @ManyToMany(() => Aluno, aluno => aluno.turmas)
   @JoinTable() // Pode especificar opções adicionais aqui, se necessário
