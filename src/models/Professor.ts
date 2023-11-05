@@ -1,39 +1,31 @@
-import {OneToMany, Entity, BaseEntity, PrimaryGeneratedColumn, Column, OneToOne } from 'typeorm'
+import {OneToMany, Entity, BaseEntity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from 'typeorm'
 import Turma from './Turma'
 import Produto from './Produtos'
-import Token from './Tokens'
 import User from './User'
+import Jogos from './jogos'
 
 @Entity()
 export default class Professor extends BaseEntity {
   @PrimaryGeneratedColumn()
   idProfessor!: number
 
-  @OneToOne(() => User, user => user.tipoUsuario)
-  tipoUsuario!: User
+  @OneToOne(() => User)
+  @JoinColumn()
+  user!: User
 
-  @Column()
-  nomeProfessor!: string
+  @OneToMany(() => Jogos, jogos => jogos.professor, { lazy: true })
+  idJogos!: Jogos
 
-  @Column()
-  sobrenomeProfessor!: string
-
-  @Column()
-  emailProfessor!: string
-
-  @Column()
-  senha!: string
-
-  @Column()
-  nascimento!: Date
-
-  @Column()
-  idJogos!: number
-
-  @OneToMany(() => Turma, turma => turma.professor)
+  @OneToMany(() => Turma, turma => turma.professor, { lazy: true })
   turmas!: Turma[];
 
-  @OneToMany(() => Produto, produto => produto.idProfessor)
+  @OneToMany(() => Produto, produto => produto.idProfessor, { lazy: true })
   produtos!: Produto[];
   
 }
+/*
+  @OneToOne(() => User, user => user.tipoUsuario, {
+    cascade: true,
+  })
+  tipoUsuario!: User
+*/

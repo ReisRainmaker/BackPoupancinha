@@ -20,8 +20,8 @@ export default class Turma extends BaseEntity {
   @JoinColumn({name: 'idProfessor'})
   professor!: Professor;
 
-  @ManyToMany(() => Aluno, aluno => aluno.turmas)
-  @JoinTable() // Pode especificar opções adicionais aqui, se necessário
+  @ManyToMany(() => Aluno, aluno => aluno.turmas, { lazy: true })
+  @JoinTable()
   idAlunos!: Aluno[];
 
 }
