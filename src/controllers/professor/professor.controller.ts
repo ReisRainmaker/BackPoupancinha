@@ -14,11 +14,7 @@ export default class ProfessorController {
 
       // Crie uma instância de professor e defina seus atributos.
       const professor = new Professor();
-      professor.nomeProfessor = nomeProfessor;
-      professor.sobrenomeProfessor = sobrenomeProfessor;
-      professor.emailProfessor = emailProfessor;
-      professor.senha = senha;
-      professor.nascimento = nascimento;
+
       professor.idJogos = idJogos;
 
       // Salve o professor no banco de dados.
@@ -88,11 +84,7 @@ export default class ProfessorController {
         return res.status(404).json({ error: 'Professor não encontrado' });
       }
 
-      professor.nomeProfessor = nomeProfessor;
-      professor.sobrenomeProfessor = sobrenomeProfessor;
-      professor.emailProfessor = emailProfessor;
-      professor.senha = senha;
-      professor.nascimento = nascimento;
+
       professor.idJogos = idJogos;
 
       await professor.save();

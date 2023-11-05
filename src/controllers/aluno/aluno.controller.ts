@@ -14,11 +14,6 @@ export default class AlunoController {
 
       // Crie uma instância do aluno e defina seus atributos.
       const aluno = new Aluno();
-      aluno.nomeAluno = nomeAluno;
-      aluno.sobrenomeAluno = sobrenomeAluno;
-      aluno.emailAluno = emailAluno;
-      aluno.senha = senha;
-      aluno.dataNascimento = dataNascimento;
       aluno.turmas = turmas; // Certifique-se de que 'turmas' seja um array de IDs de turmas existentes.
 
 
@@ -77,11 +72,7 @@ export default class AlunoController {
       if (!aluno) {
         return res.status(404).json({ error: 'Aluno não encontrado' });
       }
-      aluno.nomeAluno = nomeAluno;
-      aluno.sobrenomeAluno = sobrenomeAluno;
-      aluno.emailAluno = emailAluno;
-      aluno.senha = senha;
-      aluno.dataNascimento = dataNascimento;
+
 
       await Aluno.save(aluno);
 

@@ -14,6 +14,6 @@ export default class Conta extends BaseEntity {
   @Column()
   saldoAtual!: number
 
-  @OneToMany(() => MovimentacaoConta, movimentacao => movimentacao.idConta)
+  @OneToMany(() => MovimentacaoConta, movimentacao => movimentacao.idConta, { lazy: true })
   movimentacoes!: MovimentacaoConta[];
 }
