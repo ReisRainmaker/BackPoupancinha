@@ -34,7 +34,6 @@ export default class AuthController {
     if (tipoUsuario === 'Aluno') {
       //Cria Aluno
       userType = new Aluno();
-      //userType.conta = 3
       // Se é aluno, cria conta
       alunoConta = new Conta();
       alunoConta.idAluno = userType;
