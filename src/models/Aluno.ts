@@ -16,7 +16,4 @@ export default class Aluno extends BaseEntity {
   @OneToOne(() => User)
   @JoinColumn()
   user!: User[]
-
-  @Column()
-  conta!: number
 }
