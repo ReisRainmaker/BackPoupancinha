@@ -4,10 +4,9 @@ import AlunoController from '../../controllers/aluno/aluno.controller'
 
 const alunoRoutes = Router()
 
-alunoRoutes.post('/aluno', alunoController.store)
-alunoRoutes.get('/aluno', alunoController.index)
-alunoRoutes.get('/aluno/:idAluno', AlunoController.show)
-alunoRoutes.delete('/aluno/:idAluno', AlunoController.delete)
-alunoRoutes.put('/aluno/:idAluno', alunoController.update)
+alunoRoutes.get('/', alunoController.index)
+alunoRoutes.get('/:email', AlunoController.show)
+alunoRoutes.delete('/:email', AlunoController.delete)
+alunoRoutes.put('/:email', alunoController.update)
 
 export default alunoRoutes

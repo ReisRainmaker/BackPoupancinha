@@ -9,7 +9,7 @@ import Conta from '../../models/Conta'
 export default class AuthController {
 
   ////////////////// Inserir um novo usuário ///////////////////////
-  static async store (req: Request, res: Response) {
+  static async register (req: Request, res: Response) {
     const { name, sobreNome, email, senha, dataNascimento, tipoUsuario } = req.body
 
     if (!name) return res.status(400).json({ error: 'O nome é obrigatório' })
@@ -46,12 +46,8 @@ export default class AuthController {
     }
     // Associe o tipo de usuário ao usuário
     userType.user = user;
-    
-    
-    
     // Salve o usuário e o tipo de usuário no banco de dados em uma única transação
-    try {
-      
+    try {     
       if (tipoUsuario === 'Aluno'){
         await user.save();
         await userType.save();
@@ -73,10 +69,11 @@ export default class AuthController {
       email: user.email,
       dataNascimento: user.dataNascimento,
       tipoUsuario: user.tipoUsuario,
-
     })
   }
 
+
+  ////////////////// Login em desuso ///////////////////////
   static async login (req: Request, res: Response) {
     const { email, password } = req.body
 
@@ -112,6 +109,8 @@ export default class AuthController {
     })
   }
 
+
+  /////////////////  Refresh  ///////////////////////
   static async refresh (req: Request, res: Response) {
     const { authorization } = req.headers
 
@@ -139,6 +138,8 @@ export default class AuthController {
     })
   }
 
+
+  ///////////////////// Logout  ////////////////////////////
   static async logout (req: Request, res: Response) {
     const { authorization } = req.headers
     

@@ -1,46 +1,36 @@
 import { Request, Response } from 'express';
 import Aluno from '../../models/Aluno';
+import User from '../../models/User';
 
 export default class AlunoController {
-  //Post
-  static async store(req: Request, res: Response) {
-    try {
-      const { nomeAluno, sobrenomeAluno, emailAluno, senha, dataNascimento, turmas } = req.body;
-
-      // Verifique se os campos obrigatórios foram fornecidos.
-      if (!nomeAluno || !sobrenomeAluno || !emailAluno || !senha || !dataNascimento || !turmas) {
-        return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
-      }
-
-      // Crie uma instância do aluno e defina seus atributos.
-      const aluno = new Aluno();
-      aluno.turmas = turmas; // Certifique-se de que 'turmas' seja um array de IDs de turmas existentes.
-
-
-      // Salve o aluno no banco de dados.
-      await aluno.save();
-
-      return res.status(201).json(aluno);
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json({ error: 'Erro ao criar o aluno' });
-    }
-  }
   //get
   static async index(req: Request, res: Response) {
     const alunos = await Aluno.find()
     return res.json(alunos)
   }
-  //get
+  ////////////////////////   get by email //////////////////////////
   static async show(req: Request, res: Response) {
-    const { idAluno } = req.params
-
-    if (!idAluno || isNaN(Number(idAluno))) {
-      return res.status(400).json({ error: 'O id é obrigatório' })
+    //usa email do login para encontrar user
+    const { emailUser } = req.params
+    if (!emailUser) {
+      return res.status(400).json({ error: 'O email é obrigatório' })
     }
 
-    const aluno = await Aluno.findOneBy({ idAluno: Number(idAluno) })
-    return res.json(aluno)
+    try {
+      const selectedUser = await User.findOneBy({ email: emailUser })
+      if (!selectedUser) {
+        return res.status(404).json({ error: 'Usuário não encontrado' });
+      }
+
+      const aluno = await Aluno.findOneBy({ userId: selectedUser.id})
+      if (!aluno) {
+        return res.status(404).json({ error: 'Aluno não encontrado' });
+      }
+
+      return res.json(aluno)
+    } catch (error) {
+      return res.status(500).json({ error: 'Erro interno do servidor' });
+    }
   }
   //delete
   static async delete(req: Request, res: Response) {
