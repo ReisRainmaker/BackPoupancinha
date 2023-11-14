@@ -9,4 +9,5 @@ alunoRoutes.get('/:email', AlunoController.show)
 alunoRoutes.delete('/:email', AlunoController.delete)
 alunoRoutes.put('/:email', alunoController.update)
 
+
 export default alunoRoutes

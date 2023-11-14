@@ -14,7 +14,7 @@ export default class ContaController {
 
       // Crie uma instância da conta e defina seus atributos.
       const conta = new Conta();
-      conta.idAluno = idAluno;
+      conta.aluno = idAluno;
       conta.saldoAtual = saldoAtual;
 
       // Salve a conta no banco de dados.
@@ -84,7 +84,7 @@ export default class ContaController {
         return res.status(404).json({ error: 'Conta não encontrada' });
       }
 
-      conta.idAluno = idAluno;
+      conta.aluno = idAluno;
       conta.saldoAtual = saldoAtual;
 
       await conta.save();

@@ -8,12 +8,12 @@ export default class Conta extends BaseEntity {
   idConta!: number 
 
   @OneToOne(() => Aluno)
-  @JoinColumn({ name: 'idAluno' })
-  idAluno!: Aluno;
+  @JoinColumn({ name: 'alunoId' })
+  aluno!: Aluno;
 
   @Column()
   saldoAtual!: number
 
-  @OneToMany(() => MovimentacaoConta, movimentacao => movimentacao.idConta, { lazy: true })
+  @OneToMany(() => MovimentacaoConta, movimentacao => movimentacao.conta, { lazy: true })
   movimentacoes!: MovimentacaoConta[];
 }

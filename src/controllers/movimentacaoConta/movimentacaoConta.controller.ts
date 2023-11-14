@@ -14,7 +14,7 @@ export default class MovimentacaoContaController {
 
       // Crie uma instância de movimentação de conta e defina seus atributos.
       const movimentacaoConta = new MovimentacaoConta();
-      movimentacaoConta.idConta = idConta;
+      movimentacaoConta.conta = idConta;
       movimentacaoConta.valor = valor;
       movimentacaoConta.tipo = tipo;
       movimentacaoConta.totalAnterior = totalAnterior;
@@ -87,7 +87,7 @@ export default class MovimentacaoContaController {
         return res.status(404).json({ error: 'Movimentação de conta não encontrada' });
       }
 
-      movimentacaoConta.idConta = idConta;
+      movimentacaoConta.conta = idConta;
       movimentacaoConta.valor = valor;
       movimentacaoConta.tipo = tipo;
       movimentacaoConta.totalAnterior = totalAnterior;

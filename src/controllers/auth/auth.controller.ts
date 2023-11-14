@@ -5,12 +5,13 @@ import Aluno from '../../models/Aluno'
 import Professor from '../../models/Professor'
 import bcrypt from 'bcrypt'
 import Conta from '../../models/Conta'
+import Turma from '../../models/Turma'
 
 export default class AuthController {
 
   ////////////////// Inserir um novo usuário ///////////////////////
-  static async register (req: Request, res: Response) {
-    const { name, sobreNome, email, senha, dataNascimento, tipoUsuario } = req.body
+  static async register(req: Request, res: Response) {
+    const { name, sobreNome, email, senha, dataNascimento, tipoUsuario, turma } = req.body
 
     if (!name) return res.status(400).json({ error: 'O nome é obrigatório' })
     if (!sobreNome) return res.status(400).json({ error: 'O sobrenome é obrigatório' })
@@ -26,7 +27,8 @@ export default class AuthController {
     user.dataNascimento = dataNascimento
     user.tipoUsuario = tipoUsuario
     user.senha = bcrypt.hashSync(senha, 10) // Gera a hash da senha com bcrypt - para não salvar a senha em texto puro
-    
+
+
     // Crie uma instância do tipo de usuário (Aluno ou Professor)
     let userType;
     let alunoConta;
@@ -34,9 +36,13 @@ export default class AuthController {
     if (tipoUsuario === 'Aluno') {
       //Cria Aluno
       userType = new Aluno();
+      const turmaDoAluno = await Turma.findOneBy({nomeTurma: String(turma)});
+      if(turmaDoAluno){
+        userType.turma = turmaDoAluno
+      }
       // Se é aluno, cria conta
       alunoConta = new Conta();
-      alunoConta.idAluno = userType;
+      alunoConta.aluno = userType;
       alunoConta.saldoAtual = 0
     } else if (tipoUsuario === 'Professor') {
       //Cria professor
@@ -47,12 +53,12 @@ export default class AuthController {
     // Associe o tipo de usuário ao usuário
     userType.user = user;
     // Salve o usuário e o tipo de usuário no banco de dados em uma única transação
-    try {     
-      if (tipoUsuario === 'Aluno'){
+    try {
+      if (tipoUsuario === 'Aluno') {
         await user.save();
         await userType.save();
         await alunoConta?.save();
-      }else{
+      } else {
         await user.save();
         await userType.save();
       }
@@ -74,7 +80,7 @@ export default class AuthController {
 
 
   ////////////////// Login em desuso ///////////////////////
-  static async login (req: Request, res: Response) {
+  static async login(req: Request, res: Response) {
     const { email, password } = req.body
 
     if (!email) return res.status(400).json({ error: 'O email é obrigatório' })
@@ -111,7 +117,7 @@ export default class AuthController {
 
 
   /////////////////  Refresh  ///////////////////////
-  static async refresh (req: Request, res: Response) {
+  static async refresh(req: Request, res: Response) {
     const { authorization } = req.headers
 
     if (!authorization) return res.status(400).json({ error: 'O refresh token é obrigatório' })
@@ -140,9 +146,9 @@ export default class AuthController {
 
 
   ///////////////////// Logout  ////////////////////////////
-  static async logout (req: Request, res: Response) {
+  static async logout(req: Request, res: Response) {
     const { authorization } = req.headers
-    
+
     if (!authorization) return res.status(400).json({ error: 'O token é obrigatório' })
 
     // Verifica se o token existe

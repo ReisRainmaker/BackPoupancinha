@@ -21,6 +21,6 @@ export default class MovimentacaoConta extends BaseEntity {
   @Column({ type: 'decimal', precision: 10, scale: 2 })
   totalAtual!: number;
 
-  @ManyToOne(() => Conta, idConta => idConta.movimentacoes)
-  idConta!: Conta;
+  @ManyToOne(() => Conta, conta => conta.movimentacoes)
+  conta!: Conta;
 }

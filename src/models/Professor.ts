@@ -13,11 +13,14 @@ export default class Professor extends BaseEntity {
   @JoinColumn()
   user!: User
 
-  @OneToMany(() => Jogos, jogos => jogos.professor, { lazy: true })
-  idJogos!: Jogos
+  @Column()
+  userId!: number
 
   @OneToMany(() => Turma, turma => turma.professor, { lazy: true })
   turmas!: Turma[];
+  
+  @OneToMany(() => Jogos, jogos => jogos.professor, { lazy: true })
+  idJogos!: Jogos
 
   @OneToMany(() => Produto, produto => produto.idProfessor, { lazy: true })
   produtos!: Produto[];

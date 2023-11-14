@@ -3,10 +3,11 @@ import TurmaController from '../../controllers/turma/turma.controller';
 
 const turmaRoutes = Router();
 
-turmaRoutes.post('/turma', TurmaController.store);
-turmaRoutes.get('/turma', TurmaController.index);
-turmaRoutes.get('/turma/:idTurma', TurmaController.show);
-turmaRoutes.delete('/turma/:idTurma', TurmaController.delete);
-turmaRoutes.put('/turma/:idTurma', TurmaController.update);
+turmaRoutes.post('/', TurmaController.store);
+turmaRoutes.get('/', TurmaController.index);
+turmaRoutes.get('/:idTurma', TurmaController.show);
+turmaRoutes.get('/:nomeTurma', TurmaController.showByName);
+turmaRoutes.delete('/:idTurma', TurmaController.delete);
+turmaRoutes.put('/:idTurma', TurmaController.update);
 
 export default turmaRoutes;

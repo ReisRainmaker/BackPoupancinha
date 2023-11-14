@@ -1,4 +1,4 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, ManyToMany, JoinTable } from 'typeorm'
+import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, ManyToMany, JoinTable, OneToMany } from 'typeorm'
 import Professor from './Professor'
 import Aluno from './Aluno'
 
@@ -13,15 +13,16 @@ export default class Turma extends BaseEntity {
   @Column()
   serie!: number
 
-  @Column()
-  idProfessor!: number
-
   @ManyToOne(() => Professor)
   @JoinColumn({name: 'idProfessor'})
   professor!: Professor;
 
-  @ManyToMany(() => Aluno, aluno => aluno.turmas, { lazy: true })
-  @JoinTable()
-  idAlunos!: Aluno[];
+  @Column()
+  idProfessor!: number;
+
+  @OneToMany(() => Aluno, aluno => aluno.turma, { lazy: true })
+  @JoinTable({name: 'idAlunos'})
+  Aluno!: Aluno[];
+
 
 }

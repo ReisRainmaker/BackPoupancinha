@@ -11,13 +11,13 @@ export default class AlunoController {
   ////////////////////////   get by email //////////////////////////
   static async show(req: Request, res: Response) {
     //usa email do login para encontrar user
-    const { emailUser } = req.params
-    if (!emailUser) {
+    const { email } = req.params
+    if (!email) {
       return res.status(400).json({ error: 'O email é obrigatório' })
     }
 
     try {
-      const selectedUser = await User.findOneBy({ email: emailUser })
+      const selectedUser = await User.findOneBy({ email: email })
       if (!selectedUser) {
         return res.status(404).json({ error: 'Usuário não encontrado' });
       }

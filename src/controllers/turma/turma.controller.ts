@@ -50,6 +50,22 @@ export default class TurmaController {
 
     return res.json(turma);
   }
+  // Get (showByName)
+  static async showByName(req: Request, res: Response) {
+    const { nomeTurma } = req.params;
+
+    if (!nomeTurma || isNaN(Number(nomeTurma))) {
+      return res.status(400).json({ error: 'O id é obrigatório' });
+    }
+
+    const turma = await Turma.findOneBy({nomeTurma: String(nomeTurma)});
+
+    if (!turma) {
+      return res.status(404).json({ error: 'Turma não encontrada' });
+    }
+
+    return res.json(turma);
+  }
 
   // Delete
   static async delete(req: Request, res: Response) {
@@ -87,7 +103,7 @@ export default class TurmaController {
 
       turma.nomeTurma = nomeTurma;
       turma.serie = serie;
-      turma.idProfessor = idProfessor;
+      turma.professor = idProfessor;
 
       await turma.save();
 
