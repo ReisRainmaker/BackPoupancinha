@@ -6,6 +6,7 @@ const movimentacaoContaRoutes = Router();
 movimentacaoContaRoutes.post('/', MovimentacaoContaController.store);
 movimentacaoContaRoutes.get('/', MovimentacaoContaController.index);
 movimentacaoContaRoutes.get('/:idMovimentacao', MovimentacaoContaController.show);
+movimentacaoContaRoutes.get('/getByConta/:idConta', MovimentacaoContaController.showByConta);
 movimentacaoContaRoutes.delete('/:idMovimentacao', MovimentacaoContaController.delete);
 movimentacaoContaRoutes.put('/:idMovimentacao', MovimentacaoContaController.update);
 

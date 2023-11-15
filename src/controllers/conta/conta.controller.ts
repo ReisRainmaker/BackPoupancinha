@@ -8,7 +8,7 @@ export default class ContaController {
       const { idAluno, saldoAtual } = req.body;
 
       // Verifique se os campos obrigatórios foram fornecidos.
-      if (!idAluno || isNaN(Number(idAluno)) || saldoAtual === undefined) {
+      if (!idAluno  || saldoAtual === undefined) {
         return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
       }
 
