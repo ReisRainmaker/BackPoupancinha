@@ -3,10 +3,10 @@ import MovimentacaoContaController from '../../controllers/movimentacaoConta/mov
 
 const movimentacaoContaRoutes = Router();
 
-movimentacaoContaRoutes.post('/movimentacaoConta', MovimentacaoContaController.store);
-movimentacaoContaRoutes.get('/movimentacaoConta', MovimentacaoContaController.index);
-movimentacaoContaRoutes.get('/movimentacaoConta/:idMovimentacao', MovimentacaoContaController.show);
-movimentacaoContaRoutes.delete('/movimentacaoConta/:idMovimentacao', MovimentacaoContaController.delete);
-movimentacaoContaRoutes.put('/movimentacaoConta/:idMovimentacao', MovimentacaoContaController.update);
+movimentacaoContaRoutes.post('/', MovimentacaoContaController.store);
+movimentacaoContaRoutes.get('/', MovimentacaoContaController.index);
+movimentacaoContaRoutes.get('/:idMovimentacao', MovimentacaoContaController.show);
+movimentacaoContaRoutes.delete('/:idMovimentacao', MovimentacaoContaController.delete);
+movimentacaoContaRoutes.put('/:idMovimentacao', MovimentacaoContaController.update);
 
 export default movimentacaoContaRoutes;

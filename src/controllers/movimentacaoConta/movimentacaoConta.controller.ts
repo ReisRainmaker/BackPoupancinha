@@ -5,16 +5,18 @@ export default class MovimentacaoContaController {
   // Post
   static async store(req: Request, res: Response) {
     try {
-      const { idConta, valor, tipo, totalAnterior, totalAtual } = req.body;
+      const { idConta, dataHora, valor, tipo, totalAnterior, totalAtual } = req.body;
 
       // Verifique se os campos obrigatórios foram fornecidos.
-      if (!idConta || isNaN(Number(idConta)) || valor === undefined || tipo === undefined || totalAnterior === undefined || totalAtual === undefined) {
+      if (!idConta || !dataHora || !valor || !tipo || totalAnterior == null || !totalAtual) {
         return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
       }
 
       // Crie uma instância de movimentação de conta e defina seus atributos.
       const movimentacaoConta = new MovimentacaoConta();
+
       movimentacaoConta.conta = idConta;
+      movimentacaoConta.dataHora = dataHora;
       movimentacaoConta.valor = valor;
       movimentacaoConta.tipo = tipo;
       movimentacaoConta.totalAnterior = totalAnterior;
@@ -74,9 +76,9 @@ export default class MovimentacaoContaController {
   // Put (update)
   static async update(req: Request, res: Response) {
     const { idMovimentacao } = req.params;
-    const { idConta, valor, tipo, totalAnterior, totalAtual } = req.body;
+    const { idConta, valor, tipo, totalAnterior, totalAtual, dataHora } = req.body;
 
-    if (!idMovimentacao || isNaN(Number(idMovimentacao)) || !idConta || isNaN(Number(idConta)) || valor === undefined || tipo === undefined || totalAnterior === undefined || totalAtual === undefined) {
+    if (!idConta || !dataHora || !valor || !tipo || totalAnterior == null || !totalAtual) {
       return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
     }
 
@@ -87,6 +89,7 @@ export default class MovimentacaoContaController {
         return res.status(404).json({ error: 'Movimentação de conta não encontrada' });
       }
 
+      movimentacaoConta.dataHora = dataHora;
       movimentacaoConta.conta = idConta;
       movimentacaoConta.valor = valor;
       movimentacaoConta.tipo = tipo;
