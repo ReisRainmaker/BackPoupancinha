@@ -4,25 +4,21 @@ import User from '../../models/User';
 
 export default class AlunoController {
   //get
+  
   static async index(req: Request, res: Response) {
     const alunos = await Aluno.find()
     return res.json(alunos)
   }
-  ////////////////////////   get by email //////////////////////////
+  
   static async show(req: Request, res: Response) {
-    //usa email do login para encontrar user
-    const { email } = req.params
-    if (!email) {
-      return res.status(400).json({ error: 'O email é obrigatório' })
+    //usa id do aluno para encontrar aluno
+    const { idAluno } = req.params
+    if (!idAluno) {
+      return res.status(400).json({ error: 'O Id é obrigatório' })
     }
-
-    try {
-      const selectedUser = await User.findOneBy({ email: email })
-      if (!selectedUser) {
-        return res.status(404).json({ error: 'Usuário não encontrado' });
-      }
-
-      const aluno = await Aluno.findOneBy({ userId: selectedUser.id})
+    const idAlunoNumber: number = +idAluno;
+    try {    
+      const aluno = await Aluno.findOneBy({ idAluno: idAlunoNumber})
       if (!aluno) {
         return res.status(404).json({ error: 'Aluno não encontrado' });
       }

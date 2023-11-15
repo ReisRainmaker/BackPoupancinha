@@ -8,8 +8,11 @@ export default class Conta extends BaseEntity {
   idConta!: number 
 
   @OneToOne(() => Aluno)
-  @JoinColumn({ name: 'alunoId' })
+  @JoinColumn({ name: 'idAluno' })
   aluno!: Aluno;
+
+  @Column()
+  idAluno!: number
 
   @Column()
   saldoAtual!: number
