@@ -12,7 +12,7 @@ import authMiddleware from '../middlewere/auth.middleware';
 
 const routes = Router();
 
-routes.use('/auth',authMiddleware, authRoutes)
+routes.use('/auth', authRoutes)
 routes.use('/aluno', alunoRoutes);
 routes.use('/conta', contaRoutes);
 routes.use('/movimentacao', movimentacaoRoutes);
