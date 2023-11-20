@@ -8,10 +8,11 @@ import professorRoutes from './professor/professor.routes';
 import turmaRoutes from './turma/turma.routes';
 import authRoutes from './auth/auth.routes';
 import homeRoutes from './homeAluno/homeProfessor.routes';
+import authMiddleware from '../middlewere/auth.middleware';
 
 const routes = Router();
 
-routes.use('/auth', authRoutes)
+routes.use('/auth',authMiddleware, authRoutes)
 routes.use('/aluno', alunoRoutes);
 routes.use('/conta', contaRoutes);
 routes.use('/movimentacao', movimentacaoRoutes);

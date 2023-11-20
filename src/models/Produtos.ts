@@ -1,5 +1,6 @@
 import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import Professor from './Professor';
+import { Url } from 'url';
 
 @Entity()
 export default class Produto extends BaseEntity {
@@ -13,8 +14,18 @@ export default class Produto extends BaseEntity {
   preco!: number;
 
   @Column()
-  imagem!: string;
+  imagem!: Url;
+  
+  @Column()
+  quantDisponivel!: string;
+
+  @Column()
+  quantVendidos!: string;
+
+  @Column()
+  descricao!: string;
 
   @ManyToOne(() => Professor)
   idProfessor!: Professor;
+
 }

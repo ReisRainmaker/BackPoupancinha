@@ -40,7 +40,7 @@ export default class AuthController {
       if(turmaDoAluno){
         userType.turma = turmaDoAluno
       }
-      // Se é aluno, cria conta
+      // Se é aluno, cria conta e conta com saldo 0
       alunoConta = new Conta();
       alunoConta.aluno = userType;
       alunoConta.saldoAtual = 0
@@ -109,6 +109,7 @@ export default class AuthController {
     await token.save()
 
     return res.json({
+      idUser: token.userId,
       token: token.token,
       expiresAt: token.expiresAt,
       refreshToken: token.refreshToken

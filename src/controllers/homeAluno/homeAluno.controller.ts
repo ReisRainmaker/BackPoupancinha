@@ -14,7 +14,7 @@ export default class HomeController {
             if (!selectedUser) {
                 return res.status(404).json({ error: 'Usuário não encontrado' });
             }
-            return res.status(201).json({
+            return res.status(200).json({
                 id: selectedUser.id,
                 nome: selectedUser.nome,
                 sobrenome: selectedUser.sobrenome,
