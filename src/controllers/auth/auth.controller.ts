@@ -79,7 +79,7 @@ export default class AuthController {
   }
 
 
-  ////////////////// Login em desuso ///////////////////////
+  ////////////////// Login  ///////////////////////
   static async login(req: Request, res: Response) {
     const { email, password } = req.body
 

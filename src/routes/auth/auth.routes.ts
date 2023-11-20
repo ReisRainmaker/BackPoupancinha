@@ -4,9 +4,9 @@ import authMiddleware from '../../middlewere/auth.middleware'
 
 const authRoutes = Router()
 
-authRoutes.post('/register',authMiddleware, AuthController.register)//em uso
-authRoutes.post('/login',authMiddleware, AuthController.login)
-authRoutes.post('/refresh',authMiddleware, AuthController.refresh)
-authRoutes.post('/logout',authMiddleware, AuthController.logout)
+authRoutes.post('/register', AuthController.register)//em uso
+authRoutes.post('/login', AuthController.login)
+authRoutes.post('/refresh', AuthController.refresh)
+authRoutes.post('/logout', AuthController.logout)
 
 export default authRoutes
