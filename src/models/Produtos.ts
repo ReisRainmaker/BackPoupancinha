@@ -14,7 +14,7 @@ export default class Produto extends BaseEntity {
   preco!: number;
 
   @Column()
-  imagem!: Url;
+  imagem!: string;
   
   @Column()
   quantDisponivel!: string;
