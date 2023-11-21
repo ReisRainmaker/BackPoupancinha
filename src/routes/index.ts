@@ -7,8 +7,7 @@ import produtoRoutes from './produtos/produtos.routes';
 import professorRoutes from './professor/professor.routes';
 import turmaRoutes from './turma/turma.routes';
 import authRoutes from './auth/auth.routes';
-import homeRoutes from './homeAluno/homeProfessor.routes';
-import authMiddleware from '../middlewere/auth.middleware';
+import homeRoutes from './home/home.routes';
 
 const routes = Router();
 
@@ -20,6 +19,7 @@ routes.use('/pontuacao', pontuacaoRoutes);
 routes.use('/produto', produtoRoutes);
 routes.use('/professor', professorRoutes);
 routes.use('/turma', turmaRoutes);
-routes.use('/homeAluno', homeRoutes);
+routes.use('/home', homeRoutes);
+
 
 export default routes;
