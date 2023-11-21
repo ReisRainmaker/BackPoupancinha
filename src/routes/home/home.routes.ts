@@ -1,12 +1,12 @@
 import { Router } from 'express'
-import HomeAlunoController from '../../controllers/home/home.controller'
+import HomeController from '../../controllers/home/home.controller'
 
 const homeRoutes = Router()
 
-homeRoutes.get('/userEmail/:email', HomeAlunoController.getUserByEmail)
-homeRoutes.get('/aluno/:userId', HomeAlunoController.getAlunoByUserid)
-homeRoutes.get('/contaAluno/:idAluno', HomeAlunoController.getContaByidAluno)
-homeRoutes.get('/userId/:id', HomeAlunoController.getUserById)
-homeRoutes.get('/professor/:userId', HomeAlunoController.getProfessorByUserid)
+homeRoutes.get('/userEmail/:email', HomeController.getUserByEmail)
+homeRoutes.get('/aluno/:userId', HomeController.getAlunoByUserid)
+homeRoutes.get('/contaAluno/:idAluno', HomeController.getContaByidAluno)
+homeRoutes.get('/userId/:id', HomeController.getUserById)
+homeRoutes.get('/professor/:userId', HomeController.getProfessorByUserid)
 
 export default homeRoutes

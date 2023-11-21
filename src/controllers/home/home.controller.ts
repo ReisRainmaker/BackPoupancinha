@@ -5,7 +5,7 @@ import Conta from '../../models/Conta';
 import Professor from '../../models/Professor';
 import Turma from '../../models/Turma';
 
-export default class HomeAlunoController {
+export default class HomeController {
     static async getUserByEmail (req: Request, res: Response) {
         const { email } = req.params
         if (!email) {
@@ -72,11 +72,11 @@ export default class HomeAlunoController {
     }
     /// Solicita um usuário por seu id ///
     static async getUserById (req: Request, res: Response) {
-        const { idUser } = req.params
-        if (!idUser) {
+        const { id } = req.params
+        if (!id) {
             return res.status(400).json({ error: 'O id do usuário é obrigatório' })
         }
-        const userIdNumber: number = +idUser;
+        const userIdNumber: number = +id;
         try {
             const selectedUser = await User.findOneBy({ id: userIdNumber })
             if (!selectedUser) {
