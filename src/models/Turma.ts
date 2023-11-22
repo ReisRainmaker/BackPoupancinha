@@ -20,7 +20,7 @@ export default class Turma extends BaseEntity {
   @Column()
   idProfessor!: number;
 
-  @OneToMany(() => Aluno, aluno => aluno.turma, { lazy: true })
+  @OneToMany(() => Aluno, aluno => aluno.idTurma, { lazy: true })
   @JoinTable({name: 'idAlunos'})
   idAluno!: Aluno[];
 

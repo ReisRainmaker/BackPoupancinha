@@ -38,7 +38,9 @@ export default class AuthController {
       userType = new Aluno();
       const turmaDoAluno = await Turma.findOneBy({nomeTurma: String(turma)});
       if(turmaDoAluno){
-        userType.turma = turmaDoAluno
+        userType.idTurma = turmaDoAluno
+      }else{
+        return res.status(401).json({error: 'A turma informada não existe'})
       }
       // Se é aluno, cria conta e conta com saldo 0
       alunoConta = new Conta();

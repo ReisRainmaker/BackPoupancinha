@@ -7,8 +7,8 @@ export default class Aluno extends BaseEntity {
   @PrimaryGeneratedColumn()
   idAluno!: number
   
-  @ManyToOne(() => Turma, (turma) => turma.idAluno)
-  turma!: Turma;
+  @ManyToOne(() => Turma, (idTurma) => idTurma.idAluno)
+  idTurma!: Turma;
 
 
   @OneToOne(() => User)
