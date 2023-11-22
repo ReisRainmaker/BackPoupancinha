@@ -5,10 +5,10 @@ export default class ProdutoController {
   // Post
   static async store(req: Request, res: Response) {
     try {
-      const { nome, preco, imagem, idProfessor } = req.body;
+      const { nome, preco, imagem, idProfessor, quantDisponivel, quantVendidos, descricao } = req.body;
 
       // Verifique se os campos obrigatórios foram fornecidos.
-      if (!nome || !preco || isNaN(Number(preco)) || !imagem || !idProfessor || isNaN(Number(idProfessor))) {
+      if (nome === undefined|| preco  === undefined || imagem  === undefined || idProfessor  === undefined || quantDisponivel  === undefined || quantVendidos  === undefined || descricao  === undefined) {
         return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
       }
 
@@ -18,6 +18,9 @@ export default class ProdutoController {
       produto.preco = preco;
       produto.imagem = imagem;
       produto.idProfessor = idProfessor;
+      produto.quantDisponivel = quantDisponivel;
+      produto.quantVendidos = quantVendidos;
+      produto.descricao = descricao;
 
       // Salve o produto no banco de dados.
       await produto.save();
@@ -44,6 +47,23 @@ export default class ProdutoController {
     }
 
     const produto = await Produto.findOneBy({idProduto: Number(idProduto)});
+
+    if (!produto) {
+      return res.status(404).json({ error: 'Produto não encontrado' });
+    }
+
+    return res.json(produto);
+  }
+
+  // Get By idProfessor (show)
+  static async getByProfessor(req: Request, res: Response) {
+    const { idProfessor } = req.params;
+
+    if (!idProfessor || isNaN(Number(idProfessor))) {
+      return res.status(400).json({ error: 'O id é obrigatório' });
+    }
+
+    const produto = await Produto.findBy({idProfessor: Number(idProfessor)});
 
     if (!produto) {
       return res.status(404).json({ error: 'Produto não encontrado' });

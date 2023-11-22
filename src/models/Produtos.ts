@@ -1,4 +1,4 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne, ManyToMany } from 'typeorm';
 import Professor from './Professor';
 import { Url } from 'url';
 
@@ -17,15 +17,18 @@ export default class Produto extends BaseEntity {
   imagem!: string;
   
   @Column()
-  quantDisponivel!: string;
+  quantDisponivel!: number;
 
   @Column()
-  quantVendidos!: string;
+  quantVendidos!: number;
 
   @Column()
   descricao!: string;
 
   @ManyToOne(() => Professor)
-  idProfessor!: Professor;
+  Professor!: Professor;
+
+  @Column()
+  idProfessor!: number;
 
 }
