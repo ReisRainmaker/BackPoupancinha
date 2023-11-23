@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 import Professor from '../../models/Professor';
+import Turma from '../../models/Turma';
+import User from '../../models/User';
 
 export default class ProfessorController {
   // Post
@@ -49,6 +51,23 @@ export default class ProfessorController {
 
     return res.json(professor);
   }
+   // Get professor by idTurma (show)
+   static async getByTurma(req: Request, res: Response) {
+    const { idTurma } = req.params;
+
+    if (!idTurma || isNaN(Number(idTurma))) {
+      return res.status(400).json({ error: 'O id é obrigatório' });
+    }
+    const turma = await Turma.findOneBy({idTurma: Number(idTurma)}) 
+    const idProfessor = turma?.idProfessor
+    const professor = await Professor.findOneBy({idProfessor: Number(idProfessor)})
+    if (!professor) {
+      return res.status(404).json({ error: 'Professor não encontrado' });
+    }
+
+    return res.status(200).json(professor);
+  }
+
 
   // Delete
   static async delete(req: Request, res: Response) {
@@ -95,4 +114,5 @@ export default class ProfessorController {
       return res.status(500).json({ error: 'Erro ao atualizar o professor' });
     }
   }
+
 }

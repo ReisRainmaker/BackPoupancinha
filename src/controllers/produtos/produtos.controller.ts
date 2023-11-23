@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import Produto from '../../models/Produtos';
+import Professor from '../../models/Professor';
 
 export default class ProdutoController {
   // Post
@@ -55,16 +56,11 @@ export default class ProdutoController {
     return res.json(produto);
   }
 
-  // Get By idProfessor (show)
+  // Get By idProfessor(show)
   static async getByProfessor(req: Request, res: Response) {
     const { idProfessor } = req.params;
 
-    if (!idProfessor || isNaN(Number(idProfessor))) {
-      return res.status(400).json({ error: 'O id é obrigatório' });
-    }
-
     const produto = await Produto.findBy({idProfessor: Number(idProfessor)});
-
     if (!produto) {
       return res.status(404).json({ error: 'Produto não encontrado' });
     }

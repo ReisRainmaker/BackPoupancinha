@@ -26,9 +26,3 @@ export default class Professor extends BaseEntity {
   produtos!: Produto[];
   
 }
-/*
-  @OneToOne(() => User, user => user.tipoUsuario, {
-    cascade: true,
-  })
-  tipoUsuario!: User
-*/
