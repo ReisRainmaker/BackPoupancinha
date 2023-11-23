@@ -36,14 +36,14 @@ export default class AuthController {
     if (tipoUsuario === 'Aluno') {
       //Cria Aluno
       userType = new Aluno();
-      const turmaDoAluno = await Turma.findOneBy({nomeTurma: String(turma)});
-      if(turmaDoAluno){
+      const turmaDoAluno = await Turma.findOneBy({ nomeTurma: String(turma) });
+      if (turmaDoAluno) {
         userType.turma = turmaDoAluno
         userType.idTurma = turmaDoAluno.idTurma
-      }else{
-        return res.status(401).json({error: 'A turma informada não existe'})
+      } else {
+        return res.status(401).json({ error: 'A turma informada não existe' })
       }
-      
+
       // Se é aluno, cria conta e conta com saldo 0
       alunoConta = new Conta();
       alunoConta.aluno = userType;
@@ -55,15 +55,19 @@ export default class AuthController {
       return res.status(400).json({ error: 'Tipo de usuário inválido' });
     }
     // Associe o tipo de usuário ao usuário
-    userType.user = user;
+
     // Salve o usuário e o tipo de usuário no banco de dados em uma única transação
     try {
       if (tipoUsuario === 'Aluno') {
         await user.save();
+        userType.user = user;
+        userType.idUser = user.idUser;
         await userType.save();
         await alunoConta?.save();
       } else {
         await user.save();
+        userType.user = user;
+        userType.idUser = user.idUser;
         await userType.save();
       }
     } catch (error) {
@@ -73,7 +77,7 @@ export default class AuthController {
 
     // Não vamos retornar a hash da senha
     return res.status(201).json({
-      id: user.id,
+      id: user.idUser,
       nome: user.nome,
       sobrenome: user.sobrenome,
       email: user.email,
@@ -98,7 +102,7 @@ export default class AuthController {
 
     // Remove todos os tokens antigos do usuário
     await Token.delete(
-      { user: { id: user.id } }
+      { user: { idUser: user.idUser } }
     )
 
     const token = new Token()

@@ -92,7 +92,7 @@ export default class MovimentacaoContaController {
     const { idMovimentacao } = req.params;
     const { idConta, valor, tipo, totalAnterior, totalAtual, dataHora, descricao } = req.body;
 
-    if (!idConta || !dataHora || !valor || !tipo || totalAnterior == null || !totalAtual) {
+    if (!idConta || !dataHora || !valor || !tipo || totalAnterior === undefined || totalAtual === undefined) {
       return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
     }
 
