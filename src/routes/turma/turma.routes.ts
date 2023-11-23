@@ -6,7 +6,8 @@ const turmaRoutes = Router();
 turmaRoutes.post('/', TurmaController.store);
 turmaRoutes.get('/', TurmaController.index);
 turmaRoutes.get('/:idTurma', TurmaController.show);
-turmaRoutes.get('/:nomeTurma', TurmaController.showByName);
+turmaRoutes.get('/nomeTurma/:nomeTurma', TurmaController.showByName);
+turmaRoutes.get('/idProfessor/:idProfessor', TurmaController.showByIdProfessor);
 turmaRoutes.delete('/:idTurma', TurmaController.delete);
 turmaRoutes.put('/:idTurma', TurmaController.update);
 

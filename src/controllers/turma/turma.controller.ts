@@ -50,11 +50,11 @@ export default class TurmaController {
 
     return res.json(turma);
   }
-  // Get (showByName)
+  // Get turma pelo seu nome (para validar na criação de conta do aluno)
   static async showByName(req: Request, res: Response) {
     const { nomeTurma } = req.params;
 
-    if (!nomeTurma || isNaN(Number(nomeTurma))) {
+    if (!nomeTurma) {
       return res.status(400).json({ error: 'O id é obrigatório' });
     }
 
@@ -66,6 +66,24 @@ export default class TurmaController {
 
     return res.json(turma);
   }
+
+  // Get turma pelo id do professor
+  static async showByIdProfessor(req: Request, res: Response) {
+    const { idProfessor } = req.params;
+
+    if (!idProfessor || isNaN(Number(idProfessor))) {
+      return res.status(400).json({ error: 'O id é obrigatório' });
+    }
+
+    const turma = await Turma.findBy({idProfessor: Number(idProfessor)});
+
+    if (!turma) {
+      return res.status(404).json({ error: 'Turmas não encontradas' });
+    }
+
+    return res.json(turma);
+  }
+
 
   // Delete
   static async delete(req: Request, res: Response) {
