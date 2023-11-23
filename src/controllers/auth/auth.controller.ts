@@ -113,6 +113,8 @@ export default class AuthController {
     await token.save()
 
     return res.json({
+      nome: user.nome,
+      sobrenome: user.sobrenome,
       idUser: token.userId,
       token: token.token,
       expiresAt: token.expiresAt,
