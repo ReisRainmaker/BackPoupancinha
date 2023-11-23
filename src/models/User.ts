@@ -5,7 +5,7 @@ import Token from './Tokens'
 @Entity()
 export default class User extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id!: number
+  idUser!: number
 
   @Column()
   nome!: string

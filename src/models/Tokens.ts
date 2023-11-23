@@ -5,7 +5,7 @@ import User from './User'
 @Entity()
 export default class Token extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id!: number
+  tokenId!: number
 
   @Column()
   token!: string
@@ -17,7 +17,7 @@ export default class Token extends BaseEntity {
   expiresAt!: Date  
 
   @Column()
-  userId!: number
+  idUser!: number
 
   @ManyToOne(() => User, user => user.tokens)
   user!: User

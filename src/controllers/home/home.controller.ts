@@ -17,7 +17,7 @@ export default class HomeController {
                 return res.status(404).json({ error: 'Usuário não encontrado' });
             }
             return res.status(200).json({
-                id: selectedUser.id,
+                idUser: selectedUser.idUser,
                 nome: selectedUser.nome,
                 sobrenome: selectedUser.sobrenome,
                 email: selectedUser.email,
@@ -31,16 +31,16 @@ export default class HomeController {
     }
 
     /// Solicita um usuário atravez do email (parametro) e com o usuário, solicita um aluno.
-    static async getAlunoByUserid(req: Request, res: Response) {
+    static async getAlunoByidUser(req: Request, res: Response) {
         //usa email do login para encontrar user
-        const { userId } = req.params
-        if (!userId) {
+        const { idUser } = req.params
+        if (!idUser) {
             return res.status(400).json({ error: 'O id do usuário é obrigatório' })
         }
-        const userIdNumber: number = +userId;
+        const idUserNumber: number = +idUser;
         try {
             
-            const aluno = await Aluno.findOneBy({ userId: userIdNumber })
+            const aluno = await Aluno.findOneBy({ idUser: idUserNumber })
             if (!aluno) {
                 return res.status(404).json({ error: 'Aluno não encontrado' });
             }
@@ -57,10 +57,10 @@ export default class HomeController {
         if (!idAluno) {
             return res.status(400).json({ error: 'O id do aluno é obrigatório' })
         }
-        const userIdNumber: number = +idAluno;
+        const idUserNumber: number = +idAluno;
         try {
             
-            const contaAluno = await Conta.findOneBy({idAluno : userIdNumber })
+            const contaAluno = await Conta.findOneBy({idAluno : idUserNumber })
             if (!contaAluno) {
                 return res.status(404).json({ error: 'Aluno não encontrado' });
             }
@@ -72,18 +72,18 @@ export default class HomeController {
     }
     /// Solicita um usuário por seu id ///
     static async getUserById (req: Request, res: Response) {
-        const { id } = req.params
-        if (!id) {
+        const { idUser } = req.params
+        if (!idUser) {
             return res.status(400).json({ error: 'O id do usuário é obrigatório' })
         }
-        const userIdNumber: number = +id;
+        const idUserNumber: number = +idUser;
         try {
-            const selectedUser = await User.findOneBy({ id: userIdNumber })
+            const selectedUser = await User.findOneBy({ idUser: idUserNumber })
             if (!selectedUser) {
                 return res.status(404).json({ error: 'Usuário não encontrado' });
             }
             return res.status(200).json({
-                id: selectedUser.id,
+                idUser: selectedUser.idUser,
                 nome: selectedUser.nome,
                 sobrenome: selectedUser.sobrenome,
                 email: selectedUser.email,
@@ -96,14 +96,14 @@ export default class HomeController {
     
     }
     /// Solicita um professor atravez do id do usuário ///
-    static async getProfessorByUserid(req: Request, res: Response) {
+    static async getProfessorByidUser(req: Request, res: Response) {
         const { idUser } = req.params
         if (!idUser) {
             return res.status(400).json({ error: 'O id do usuário é obrigatório' })
         }
-        const userIdNumber: number = +idUser;
+        const idUserNumber: number = +idUser;
         try {          
-            const professor = await Professor.findOneBy({ userId: userIdNumber })
+            const professor = await Professor.findOneBy({ idUser: idUserNumber })
             if (!professor) {
                 return res.status(404).json({ error: 'Professor não encontrado' });
             }

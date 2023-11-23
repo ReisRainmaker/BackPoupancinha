@@ -18,5 +18,5 @@ export default class Aluno extends BaseEntity {
   user!: User
 
   @Column()
-  userId!: number
+  idUser!: number
 }

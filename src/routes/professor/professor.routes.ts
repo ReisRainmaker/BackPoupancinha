@@ -7,6 +7,7 @@ professorRoutes.post('/', ProfessorController.store);
 professorRoutes.get('/', ProfessorController.index);
 professorRoutes.get('/:idProfessor', ProfessorController.show);
 professorRoutes.get('/byTurma/:idTurma', ProfessorController.getByTurma);
+professorRoutes.get('/byUser/:idUser', ProfessorController.getByUser);
 professorRoutes.delete('/:idProfessor', ProfessorController.delete);
 professorRoutes.put('/:idProfessor', ProfessorController.update);
 

@@ -68,6 +68,21 @@ export default class ProfessorController {
     return res.status(200).json(professor);
   }
 
+  // Get professor by idUser (show)
+  static async getByUser(req: Request, res: Response) {
+    const { idUser } = req.params;
+
+    if (!idUser || isNaN(Number(idUser))) {
+      return res.status(400).json({ error: 'O id é obrigatório' });
+    }
+    const professor = await Professor.findOneBy({idUser: Number(idUser)})
+    if (!professor) {
+      return res.status(404).json({ error: 'Professor não encontrado' });
+    }
+
+    return res.status(200).json(professor);
+  }
+
 
   // Delete
   static async delete(req: Request, res: Response) {

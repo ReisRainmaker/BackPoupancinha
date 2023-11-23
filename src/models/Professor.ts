@@ -14,7 +14,7 @@ export default class Professor extends BaseEntity {
   user!: User
 
   @Column()
-  userId!: number
+  idUser!: number
 
   @OneToMany(() => Turma, turma => turma.professor, { lazy: true })
   turmas!: Turma[];

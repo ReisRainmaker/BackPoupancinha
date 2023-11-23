@@ -115,7 +115,7 @@ export default class AuthController {
     return res.json({
       nome: user.nome,
       sobrenome: user.sobrenome,
-      idUser: token.userId,
+      idUser: token.idUser,
       token: token.token,
       expiresAt: token.expiresAt,
       refreshToken: token.refreshToken

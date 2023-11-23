@@ -17,7 +17,7 @@ export default async function authMiddleware (req: Request, res: Response, next:
   }
 
   // Adiciona o id do usuário no header da requisição
-  req.headers.userId = userToken.userId.toString()
+  req.headers.idUser = userToken.idUser.toString()
 
   // Continua a execução
   next()
