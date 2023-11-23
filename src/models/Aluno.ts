@@ -6,10 +6,12 @@ import User from './User'
 export default class Aluno extends BaseEntity {
   @PrimaryGeneratedColumn()
   idAluno!: number
-  
-  @ManyToOne(() => Turma, (idTurma) => idTurma.idAluno)
-  idTurma!: Turma;
+ 
+  @Column()
+  idTurma!: number
 
+  @ManyToOne(() => Turma, (idTurma) => idTurma.idAluno)
+  turma!: Turma;
 
   @OneToOne(() => User)
   @JoinColumn()
