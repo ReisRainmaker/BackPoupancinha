@@ -114,6 +114,7 @@ export default class AuthController {
     token.refreshToken = bcrypt.hashSync(Math.random().toString(36), 1).slice(-20)
 
     token.user = user
+    token.idUser = user.idUser
     await token.save()
 
     return res.json({
