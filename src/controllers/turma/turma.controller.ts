@@ -5,10 +5,10 @@ export default class TurmaController {
   // Post
   static async store(req: Request, res: Response) {
     try {
-      const { nomeTurma, serie, idProfessor } = req.body;
+      const { nomeTurma, serie, idProfessor, nomeEscola, imagemTurma } = req.body;
 
       // Verifique se os campos obrigatórios foram fornecidos.
-      if (!nomeTurma || !serie || isNaN(Number(serie)) || !idProfessor || isNaN(Number(idProfessor))) {
+      if (!nomeTurma || !nomeEscola || !imagemTurma || !serie || isNaN(Number(serie)) || !idProfessor || isNaN(Number(idProfessor))) {
         return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
       }
 
@@ -17,6 +17,8 @@ export default class TurmaController {
       turma.nomeTurma = nomeTurma;
       turma.serie = serie;
       turma.idProfessor = idProfessor;
+      turma.nomeEscola = nomeEscola;
+      turma.imagemTurma = imagemTurma;
 
       // Salve a turma no banco de dados.
       await turma.save();
@@ -106,9 +108,10 @@ export default class TurmaController {
   // Put (update)
   static async update(req: Request, res: Response) {
     const { idTurma } = req.params;
-    const { nomeTurma, serie, idProfessor } = req.body;
+    const { nomeTurma, serie, idProfessor, nomeEscola, imagemTurma } = req.body;
 
-    if (!idTurma || isNaN(Number(idTurma)) || !nomeTurma || !serie || isNaN(Number(serie)) || !idProfessor || isNaN(Number(idProfessor))) {
+    // Verifique se os campos obrigatórios foram fornecidos.
+    if (!nomeTurma || !nomeEscola || !imagemTurma || !serie || isNaN(Number(serie)) || !idProfessor || isNaN(Number(idProfessor))) {
       return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
     }
 
@@ -121,7 +124,9 @@ export default class TurmaController {
 
       turma.nomeTurma = nomeTurma;
       turma.serie = serie;
-      turma.professor = idProfessor;
+      turma.idProfessor = idProfessor;
+      turma.nomeEscola = nomeEscola;
+      turma.imagemTurma = imagemTurma;
 
       await turma.save();
 

@@ -11,7 +11,13 @@ export default class Turma extends BaseEntity {
   nomeTurma!: string
 
   @Column()
+  nomeEscola!: string
+
+  @Column()
   serie!: number
+
+  @Column()
+  imagemTurma!: number
 
   @ManyToOne(() => Professor)
   @JoinColumn({name: 'idProfessor'})
