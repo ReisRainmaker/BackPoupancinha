@@ -51,6 +51,7 @@ export default class ProfessorController {
 
     return res.json(professor);
   }
+  
    // Get professor by idTurma (show)
    static async getByTurma(req: Request, res: Response) {
     const { idTurma } = req.params;
